@@ -16,7 +16,7 @@ public class StockManager {
 
     // 2. Add a new stock
     public void addStock(String stockId, long timestamp, Float price) {
-        if ((stockId != null && timestamp >= 0 && price != null && price > 0) && this.StockTree.search(stockId) == null) {
+        if ((stockId != null && timestamp > 0 && price != null && price > 0) && this.StockTree.search(stockId) == null) {
             StockNode stockToInsert = new StockNode(stockId, timestamp, price);
             this.StockTree.insert(stockToInsert);
             PriceNode priceNodeToInsert = new PriceNode(stockToInsert);
