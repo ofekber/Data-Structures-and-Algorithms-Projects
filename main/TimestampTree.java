@@ -8,15 +8,13 @@ public class TimestampTree {
         this.root = root;
     }
 
-
     public TimestampTree() {
         this.root = new TimestampNode();
         TimestampNode infSentinel = new TimestampNode();
         TimestampNode minusInfSentinel = new TimestampNode();
-        infSentinel.setSentinel(true); // מימוש של סנטינלס בעזרת בוילאן, איך עושים בעזרת מפתח אולי
+        infSentinel.setSentinel(true);
         minusInfSentinel.setSentinel(true);
         setChildren(this.root, minusInfSentinel, infSentinel, null);
-
     }
 
     public void setChildren(TimestampNode x, TimestampNode left, TimestampNode middle, TimestampNode right) {
@@ -166,7 +164,7 @@ public class TimestampTree {
 
     public TimestampNode search(long key) {
         if (this.root != null && this.root.isLeaf()) {
-            if (this.root.getKey() == key) { // שיניתי את השורה המקורית ממקסים ושחר, לוודא שעובד טוב
+            if (this.root.getKey() == key) {
                 return this.root;
             } else {
                 return null;
