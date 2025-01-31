@@ -7,7 +7,6 @@ public class Stock {
     private final long initializationTimestamp;
     private PriceNode equivalent;
 
-    //אתחול מניה
     public Stock(String stockId, long timestamp, float initialPrice) {
         this.stockId = stockId;
         this.timestampTree = new TimestampTree();
@@ -16,11 +15,10 @@ public class Stock {
         this.timestampTree.insert(new TimestampNode(timestamp, initialPrice));
     }
 
-    public void updatePrice(long timestamp, float price){ //לוודא שלא מעלה את הסיבוכיות לlog בריבוע
+    public void updatePrice(long timestamp, float price){
         TimestampNode timestampNodeToInsert = new TimestampNode(timestamp, price);
         this.timestampTree.insert(timestampNodeToInsert);
         this.currentPrice += price;
-        this.currentPrice = roundPrice(this.currentPrice);
     }
 
     public long getInitializationTime() {return this.initializationTimestamp;}
@@ -30,7 +28,6 @@ public class Stock {
             TimestampNode timestampToDelete = this.timestampTree.search(timestamp);
             this.timestampTree.delete(timestampToDelete);
             this.currentPrice -= timestampToDelete.getPriceDifference();
-            this.currentPrice = this.roundPrice(this.currentPrice);
         } else {throw new IllegalArgumentException();}
     }
     public float getCurrentPrice() {return this.currentPrice;}
@@ -40,10 +37,5 @@ public class Stock {
         this.equivalent = equivalent;
     }
     public PriceNode getEquivalent() {return this.equivalent;}
-
-    private float roundPrice(float current){
-        int temp = (int)(current * 100 + 0.5f);
-        return temp / 100f;
-    }
 
 }
