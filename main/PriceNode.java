@@ -4,14 +4,14 @@ public class PriceNode {
     private float priceKey;
     private String idKey;
     private float minSubtreeValue;
-    private int size; // מספר העלים חוץ מהסנטינלס שמושרש בו
+    private int size;
     private boolean sentinel;
     private PriceNode parent;
     private PriceNode left;
     private PriceNode middle;
     private PriceNode right;
 
-    public PriceNode() { //בשביל הסנטינלס
+    public PriceNode() {
         this.sentinel = false;
         this.size = 0;
     }
@@ -24,16 +24,14 @@ public class PriceNode {
         this.minSubtreeValue = this.priceKey;
     }
 
-    // Add a method to calculate and update the minimum subtree value
+
     public void updateMinSubtreeValue() {
         if (this.isLeaf()) {
-            // For leaf nodes, the minimum value is the node's own price key
+
             this.minSubtreeValue = this.priceKey;
         } else {
-            // Initialize the minimum value to a very large number
             float minValue = Float.MAX_VALUE;
 
-            // Recursively calculate the minimum value for each child
             if (this.left != null && !this.left.isSentinel()) {
                 this.left.updateMinSubtreeValue();
                 minValue = Math.min(minValue, this.left.minSubtreeValue);
@@ -47,14 +45,13 @@ public class PriceNode {
                 minValue = Math.min(minValue, this.right.minSubtreeValue);
             }
 
-            // Update the current node's minimum subtree value
             this.minSubtreeValue = minValue;
         }
     }
 
 
     public boolean isLeaf() {
-        return this.left == null; // because leaves have no sons
+        return this.left == null;
     }
 
     public PriceNode getLeft() {return this.left;}
@@ -95,9 +92,8 @@ public class PriceNode {
             }
         }
 
-
     public void updateKey() {
-        this.priceKey = this.getLeft().getPriceKey(); // ייתכן שחסר כאן משהו
+        this.priceKey = this.getLeft().getPriceKey();
         if (this.getMiddle() != null) {
             this.priceKey = this.getMiddle().getPriceKey();
             this.idKey = this.getMiddle().getIdKey();
