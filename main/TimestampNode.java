@@ -3,14 +3,14 @@ package main;
 public class TimestampNode {
     private long key;
     private float priceDifference;
-    private int size; // מספר העלים חוץ מהסנטינלס שמושרש בו
+    private int size;
     private boolean sentinel;
     private TimestampNode parent;
     private TimestampNode left;
     private TimestampNode middle;
     private TimestampNode right;
 
-    public TimestampNode() { //בשביל הסנטינלס
+    public TimestampNode() {
         this.sentinel = false;
         this.size = 0;
     }
@@ -23,7 +23,7 @@ public class TimestampNode {
     }
 
     public boolean isLeaf() {
-        return this.left == null; // because leaves have no sons
+        return this.left == null;
     }
 
     public TimestampNode getLeft() {return this.left;}
